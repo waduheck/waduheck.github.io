@@ -1,0 +1,342 @@
+/* 组件层样式：只允许使用 semantic 令牌（--fg / --bg / --line / --accent / --space-* / --text-* …）
+   不允许出现 #hex 或 px 硬编码的距离值。改视觉只能改 packages/tokens。 */
+
+/* ───────── 基础件 ───────── */
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  line-height: var(--leading-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.metric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  color: var(--fg-strong);
+}
+
+.prose {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--fg-muted);
+  max-width: var(--size-prose);
+  text-wrap: pretty;
+}
+
+.prose--wide {
+  max-width: var(--size-prose-wide);
+  font-size: var(--text-small);
+  line-height: var(--leading-small);
+}
+
+/* 链接：下划线从左往右长出来；强调色只在这里出现 */
+.link {
+  color: var(--fg);
+  text-decoration: none;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% var(--size-rule);
+  padding-bottom: 2px;
+  transition: background-size var(--motion-interactive), color var(--motion-interactive);
+}
+.link:hover,
+.link:focus-visible {
+  background-size: 100% var(--size-rule);
+  color: var(--fg-strong);
+}
+
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+/* ───────── 入场动画 ───────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--motion-reveal),
+    transform var(--motion-reveal);
+  transition-delay: var(--d, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ───────── 第一屏 ───────── */
+
+.hero {
+  padding-block: var(--space-24) var(--space-20);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.hero__eyebrow {
+  margin-bottom: var(--space-2);
+}
+
+.hero__name {
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  font-weight: var(--weight-semibold);
+  color: var(--fg-strong);
+  margin: 0;
+  max-width: 18ch;
+}
+
+.hero__role {
+  font-size: var(--text-title);
+  line-height: var(--leading-title);
+  letter-spacing: var(--tracking-title);
+  font-weight: var(--weight-regular);
+  color: var(--fg-muted);
+  margin: 0;
+}
+
+.hero__tagline {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--fg-muted);
+  max-width: var(--size-prose-wide);
+  margin: 0;
+}
+
+.hero__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin-top: var(--space-4);
+  font-size: var(--text-small);
+  min-height: var(--size-tap);
+  align-items: center;
+}
+
+/* ───────── 章节 ───────── */
+
+.section {
+  padding-block: var(--space-12) 0;
+  border-top: var(--size-hairline) solid var(--line);
+}
+
+.section__head {
+  display: grid;
+  grid-template-columns: var(--space-12) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: baseline;
+  padding-block: var(--space-6) var(--space-10);
+}
+
+.section__index {
+  color: var(--accent);
+  opacity: 0.75;
+}
+
+.section__title {
+  font-size: var(--text-title);
+  line-height: var(--leading-title);
+  letter-spacing: var(--tracking-title);
+  font-weight: var(--weight-medium);
+  color: var(--fg-strong);
+  margin: 0;
+}
+
+.section__kicker {
+  grid-column: 2;
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-small);
+  line-height: var(--leading-small);
+  color: var(--fg-subtle);
+  max-width: var(--size-prose-wide);
+}
+
+/* ───────── 量化条 ───────── */
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.stat__value {
+  font-size: var(--text-heading);
+  line-height: 1.1;
+  font-weight: var(--weight-medium);
+}
+.stat__label {
+  font-size: var(--text-label);
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+.stat--lg .stat__value {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  letter-spacing: var(--tracking-display);
+  color: var(--accent);
+}
+.stat--lg .stat__label {
+  font-size: var(--text-small);
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+}
+
+/* ───────── 布局 A：对账表 ───────── */
+
+.works--ledger {
+  border-bottom: var(--size-hairline) solid var(--line);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: var(--space-12) minmax(0, 1fr);
+  gap: var(--space-6);
+  padding-block: var(--space-10);
+  border-top: var(--size-hairline) solid var(--line);
+  transition: border-color var(--motion-state);
+}
+/* 布局 A：Reveal 包了一层，所以首行的发丝线要按包装元素判 */
+.works--ledger > .reveal:first-child .row {
+  border-top: 0;
+}
+
+.row:hover {
+  border-top-color: var(--line-strong);
+}
+
+.row__index {
+  padding-top: 0.35em;
+  transition: color var(--motion-interactive);
+}
+.row:hover .row__index {
+  color: var(--accent);
+}
+
+.row__title {
+  font-size: var(--text-heading);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  font-weight: var(--weight-medium);
+  color: var(--fg-strong);
+  margin: 0;
+}
+
+.row__body {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-small);
+  line-height: var(--leading-small);
+  max-width: var(--size-prose-wide);
+}
+
+.row__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-10);
+  margin-top: var(--space-6);
+}
+
+/* ───────── 布局 B：不对称块 ───────── */
+
+.works--bento {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.wcard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-8);
+  background: var(--card-bg);
+  border: var(--size-hairline) solid var(--card-border);
+  border-radius: var(--card-radius);
+  transition:
+    background var(--motion-state),
+    border-color var(--motion-state),
+    transform var(--motion-state);
+}
+.wcard:hover {
+  background: var(--card-bg-hover);
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+
+/* Reveal 包了一层，网格跨度要落在包装元素上 */
+.works--bento > .reveal:nth-child(1) { grid-column: span 7; }
+.works--bento > .reveal:nth-child(2) { grid-column: span 5; }
+.works--bento > .reveal:nth-child(3) { grid-column: span 5; }
+.works--bento > .reveal:nth-child(4) { grid-column: span 7; }
+.works--bento > .reveal { display: flex; }
+.works--bento .wcard { flex: 1; }
+
+.wcard--featured {
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in oklab, var(--accent) 9%, transparent) 0%, transparent 55%),
+    var(--card-bg);
+}
+
+.wcard__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.wcard__title {
+  font-size: var(--text-heading);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  font-weight: var(--weight-medium);
+  color: var(--fg-strong);
+  margin: 0;
+}
+
+.wcard__body {
+  margin: 0;
+  font-size: var(--text-small);
+  line-height: var(--leading-small);
+  max-width: none;
+}
+
+.wcard__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-8);
+  margin-top: auto;
+  padding-top: var(--space-5);
+  border-top: var(--size-hairline) solid var(--line);
+}
+
+/* ───────── 响应式 ───────── */
+
+@media (max-width: 900px) {
+  .works--bento > .reveal:nth-child(n) { grid-column: span 12; }
+}
+
+@media (max-width: 640px) {
+  .hero { padding-block: var(--space-16) var(--space-12); }
+  .section__head,
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+  .section__kicker { grid-column: 1; }
+  .row__index { padding-top: 0; }
+  .row__stats { gap: var(--space-4) var(--space-6); }
+  .wcard { padding: var(--space-6); }
+}

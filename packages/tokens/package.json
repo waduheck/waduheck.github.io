@@ -1,0 +1,16 @@
+{
+  "name": "@portfolio/tokens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "设计令牌：primitive → semantic，输出 CSS 变量与 JS 对象",
+  "exports": {
+    "./css": "./dist/tokens.css",
+    "./js": "./dist/tokens.mjs"
+  },
+  "files": ["dist", "tokens"],
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node --watch build.mjs"
+  }
+}

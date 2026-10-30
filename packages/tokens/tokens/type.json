@@ -1,0 +1,43 @@
+{
+  "font": {
+    "sans": {
+      "value": "ui-sans-serif, -apple-system, \"SF Pro Text\", \"Segoe UI Variable Text\", Inter, \"PingFang SC\", \"Hiragino Sans GB\", system-ui, sans-serif"
+    },
+    "mono": {
+      "value": "ui-monospace, \"SF Mono\", \"JetBrains Mono\", \"Cascadia Mono\", Menlo, Consolas, monospace"
+    }
+  },
+
+  "weight": {
+    "regular": { "value": "400" },
+    "medium": { "value": "500" },
+    "semibold": { "value": "600" },
+    "bold": { "value": "700" }
+  },
+
+  "text": {
+    "display": { "value": "clamp(2.75rem, 6.4vw, 5.25rem)", "comment": "44–84px：参考站 display 落差 2.4× 的内核" },
+    "title":   { "value": "1.75rem",  "comment": "28px 段落标题" },
+    "heading": { "value": "1.25rem",  "comment": "20px 卡片标题" },
+    "body":    { "value": "1.0625rem","comment": "17px 正文" },
+    "small":   { "value": "0.9375rem","comment": "15px 次要正文" },
+    "label":   { "value": "0.75rem",  "comment": "12px 等宽标签" }
+  },
+
+  "leading": {
+    "display": { "value": "0.96", "comment": "大标题必须近 1.0，1.6 会立刻显得松垮" },
+    "title":   { "value": "1.15" },
+    "heading": { "value": "1.35" },
+    "body":    { "value": "1.62" },
+    "small":   { "value": "1.55" },
+    "label":   { "value": "1.4" }
+  },
+
+  "tracking": {
+    "display": { "value": "-0.035em" },
+    "title":   { "value": "-0.02em" },
+    "heading": { "value": "-0.01em" },
+    "body":    { "value": "0em" },
+    "label":   { "value": "0.09em", "comment": "等宽小标签拉开字距" }
+  }
+}

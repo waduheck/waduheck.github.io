@@ -1,120 +1,392 @@
-/* 图比正文宽：撑到 1200px，字才不会缩得太小 */
+/* C4 图：颜色全部走令牌，图形与页面共用同一套色阶。
+   除 --accent（在范围内的系统 / hover）之外不引入新的色相。 */
+
 .c4 {
-  width: min(1200px, 96vw);
+  --c-person: var(--color-neutral-700);
+  --c-system: var(--color-neutral-800);
+  --c-container: var(--color-neutral-700);
+  --c-store: var(--color-neutral-600);
+  --c-external: var(--color-neutral-900);
+  --c-wire: var(--color-neutral-500);
+  --c-hot: var(--accent);
+
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  --person: #0b3d75;
-  --system: #1258a8;
-  --container: #2d79c7;
-  --store: #17807e;
-  --external: #3b3f48;
-  --hot: #ffd166;
 }
-.c4-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; }
-.c4-head h2 { margin-bottom: 0.2rem; border: 0; }
-.c4-sub { margin: 0 0 0.8rem; color: var(--muted); }
-.c4-levels { display: flex; gap: 0.4rem; margin-bottom: 0.8rem; }
+
+.c4-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+.c4-sub {
+  margin: 0;
+  font-size: var(--text-small);
+  line-height: var(--leading-small);
+  color: var(--fg-subtle);
+}
+
+.c4-levels {
+  display: flex;
+  gap: var(--space-2);
+}
+
 .c4-levels button {
-  background: var(--card); color: var(--fg); border: 1px solid var(--line);
-  border-radius: 999px; padding: 0.4rem 0.9rem; cursor: pointer; transition: all 0.25s;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--fg-muted);
+  border: var(--size-hairline) solid var(--line);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+  transition:
+    color var(--motion-interactive),
+    border-color var(--motion-interactive),
+    background var(--motion-interactive);
 }
-.c4-levels button.sel { border-color: var(--accent); box-shadow: 0 0 18px #7cc4ff66; }
-.c4-levels button:disabled { opacity: 0.4; cursor: not-allowed; }
+.c4-levels button:hover:not(:disabled) {
+  color: var(--fg-strong);
+  border-color: var(--line-strong);
+}
+.c4-levels button.sel {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+}
+.c4-levels button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
 
-.c4-scroll { overflow-x: auto; border-radius: 18px; }
+.c4-scroll {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+}
+
 .c4-stage {
-  position: relative; min-width: 900px; aspect-ratio: 1200 / 900; overflow: hidden;
-  border-radius: 18px; border: 1px solid var(--line);
+  position: relative;
+  min-width: 900px;
+  aspect-ratio: 1200 / 900;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: var(--size-hairline) solid var(--line);
   background:
-    radial-gradient(circle at 50% 40%, #16233a 0%, transparent 60%),
-    linear-gradient(#ffffff08 1px, transparent 1px) 0 0 / 40px 40px,
-    linear-gradient(90deg, #ffffff08 1px, transparent 1px) 0 0 / 40px 40px,
-    #0b0d12;
+    radial-gradient(70% 55% at 50% 38%, color-mix(in oklab, var(--accent) 5%, transparent) 0%, transparent 62%),
+    linear-gradient(color-mix(in oklab, var(--fg) 4%, transparent) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, color-mix(in oklab, var(--fg) 4%, transparent) 1px, transparent 1px) 0 0 / 40px 40px,
+    var(--bg-raised);
 }
 
-/* 层级切换：Level 1 放大淡出，Level 2 从系统方框里“展开” */
+/* 层级切换：Level 1 放大淡出，Level 2 从系统方框里展开 */
 .c4-layer {
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
   transform-origin: 50% 46.7%;
-  transition: transform 0.8s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.6s ease;
+  transition:
+    transform var(--motion-zoom),
+    opacity var(--duration-slow) var(--ease-inout);
 }
-.c4-layer.active { opacity: 1; transform: scale(1); }
-.c4-layer.context.inactive { opacity: 0; transform: scale(2.8); pointer-events: none; }
-.c4-layer.container.inactive { opacity: 0; transform: scale(0.36); pointer-events: none; }
-.c4-svg { width: 100%; height: 100%; display: block; }
+.c4-layer.active {
+  opacity: 1;
+  transform: scale(1);
+}
+.c4-layer.context.inactive {
+  opacity: 0;
+  transform: scale(2.8);
+  pointer-events: none;
+}
+.c4-layer.container.inactive {
+  opacity: 0;
+  transform: scale(0.36);
+  pointer-events: none;
+}
+.c4-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 
 /* 系统边界 */
-.c4-boundary rect { fill: #ffffff05; stroke: #8aa4c8; stroke-width: 1.5; stroke-dasharray: 8 6; }
-.c4-boundary .bname { fill: var(--fg); font-weight: 700; font-size: 16px; }
-.c4-boundary .btype { fill: var(--muted); font-size: 12px; }
-.c4-layer.active .c4-boundary rect { animation: c4march 1.2s linear infinite; }
-@keyframes c4march { to { stroke-dashoffset: -28; } }
+.c4-boundary rect {
+  fill: color-mix(in oklab, var(--fg) 3%, transparent);
+  stroke: var(--color-neutral-500);
+  stroke-width: 1.5;
+  stroke-dasharray: 8 6;
+}
+.c4-boundary .bname {
+  fill: var(--fg);
+  font-family: var(--font-sans);
+  font-weight: var(--weight-semibold);
+  font-size: 16px;
+}
+.c4-boundary .btype {
+  fill: var(--fg-subtle);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.c4-layer.active .c4-boundary rect {
+  animation: c4march 1.2s linear infinite;
+}
+@keyframes c4march {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
 
 /* 关系线 */
-.c4-rel path { fill: none; stroke: #7d8aa3; stroke-width: 1.6; stroke-dasharray: 1; transition: stroke 0.25s; }
-.c4-layer.active .c4-rel path { animation: c4draw 0.9s ease-out 0.45s both; }
-@keyframes c4draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-.c4-head-mark { fill: #7d8aa3; }
-.c4-head-mark-hot { fill: var(--hot); }
-.c4-dot { fill: var(--accent); filter: drop-shadow(0 0 6px var(--accent)); }
-.c4-rel.hot path { stroke: var(--hot); stroke-width: 2.4; }
-.c4-rel.hot .c4-dot { fill: var(--hot); filter: drop-shadow(0 0 8px var(--hot)); }
-.c4-rel, .c4-node > *, .c4-boundary { transition: opacity 0.25s; }
-.c4-rel.dim, .c4-boundary.dim { opacity: 0.12; }
-.c4-node.dim > * { opacity: 0.15; }
+.c4-rel path {
+  fill: none;
+  stroke: var(--c-wire);
+  stroke-width: 1.6;
+  stroke-dasharray: 1;
+  transition: stroke var(--motion-interactive);
+}
+.c4-layer.active .c4-rel path {
+  animation: c4draw var(--duration-slow) var(--ease-out) 0.35s both;
+}
+@keyframes c4draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.c4-head-mark {
+  fill: var(--c-wire);
+}
+.c4-head-mark-hot {
+  fill: var(--c-hot);
+}
+.c4-dot {
+  fill: var(--accent);
+  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--accent) 60%, transparent));
+}
+.c4-rel.hot path {
+  stroke: var(--c-hot);
+  stroke-width: 2.2;
+}
+.c4-rel.hot .c4-dot {
+  fill: var(--c-hot);
+}
+.c4-rel,
+.c4-node > *,
+.c4-boundary {
+  transition: opacity var(--motion-interactive);
+}
+.c4-rel.dim,
+.c4-boundary.dim {
+  opacity: 0.12;
+}
+.c4-node.dim > * {
+  opacity: 0.15;
+}
 
 .c4-label {
-  width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  font-size: 11.5px; line-height: 1.25; text-align: center; color: #d6dcea; pointer-events: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--fg);
+  pointer-events: none;
 }
-.c4-label span { background: #0b0d12d9; padding: 0 4px; border-radius: 4px; }
-.c4-label small { color: #8f9bb3; font-size: 10.5px; background: #0b0d12d9; padding: 0 4px; border-radius: 4px; }
-.c4-rel.hot .c4-label { color: var(--hot); }
+.c4-label span,
+.c4-label small {
+  background: color-mix(in oklab, var(--bg) 82%, transparent);
+  padding: 0 4px;
+  border-radius: var(--radius-sm);
+}
+.c4-label small {
+  font-family: var(--font-mono);
+  color: var(--fg-subtle);
+  font-size: 10px;
+}
+.c4-rel.hot .c4-label {
+  color: var(--c-hot);
+}
 
 /* 元素 */
-.c4-node { cursor: default; transform-box: fill-box; transform-origin: center; }
-.c4-layer.active .c4-node { animation: c4pop 0.55s cubic-bezier(0.2, 1.5, 0.4, 1) var(--d) both; }
-@keyframes c4pop { from { opacity: 0; transform: scale(0.6) translateY(14px); } to { opacity: 1; transform: none; } }
+.c4-node {
+  cursor: default;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.c4-layer.active .c4-node {
+  animation: c4pop 0.55s var(--ease-spring) var(--d) both;
+}
+@keyframes c4pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6) translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 
 .c4-box {
-  width: 100%; height: 100%; box-sizing: border-box; padding: 10px 12px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-  border-radius: 12px; border: 1.5px solid #ffffff33; color: #fff;
-  box-shadow: 0 6px 24px #0008; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: var(--radius-md);
+  border: 1.5px solid color-mix(in oklab, var(--fg) 14%, transparent);
+  color: var(--fg);
+  transition:
+    transform var(--motion-interactive),
+    border-color var(--motion-interactive),
+    box-shadow var(--motion-interactive);
 }
-.c4-box b { font-size: 15px; }
-.c4-box i { font-style: normal; font-size: 11px; color: #cfe0ff; margin: 2px 0 4px; }
-.c4-box p { margin: 0; font-size: 12px; line-height: 1.3; color: #e8eefb; }
-.c4-box em { margin-top: 6px; font-size: 11px; color: var(--hot); font-style: normal; }
-.c4-node:hover .c4-box { transform: translateY(-3px); border-color: var(--hot); box-shadow: 0 0 26px #ffd16655; }
+.c4-box b {
+  font-size: 15px;
+  font-weight: var(--weight-semibold);
+}
+.c4-box i {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--fg-subtle);
+  margin: 3px 0 5px;
+}
+.c4-box p {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.3;
+  color: var(--fg-muted);
+}
+.c4-box em {
+  margin-top: 6px;
+  font-size: 10.5px;
+  font-style: normal;
+  font-family: var(--font-mono);
+  color: var(--accent);
+}
+.c4-node:hover .c4-box {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 0 24px color-mix(in oklab, var(--accent) 22%, transparent);
+}
 
-.c4-node.person .c4-box { background: var(--person); border-radius: 22px; }
-.c4-person-head { fill: var(--person); stroke: #ffffff33; stroke-width: 1.5; }
-.c4-node.system .c4-box { background: linear-gradient(135deg, var(--system), #1b74d8); }
-.c4-node.container .c4-box { background: var(--container); }
-.c4-node.store .c4-box { background: var(--store); border-radius: 50% / 20px; padding-top: 18px; }
-.c4-node.external .c4-box { background: var(--external); }
+.c4-node.person .c4-box {
+  background: var(--c-person);
+  border-radius: var(--radius-full);
+}
+.c4-person-head {
+  fill: var(--c-person);
+  stroke: color-mix(in oklab, var(--fg) 14%, transparent);
+  stroke-width: 1.5;
+}
+.c4-node.system .c4-box {
+  background: var(--c-system);
+  border-color: var(--accent-dim);
+}
+.c4-node.container .c4-box {
+  background: var(--c-container);
+}
+.c4-node.store .c4-box {
+  background: var(--c-store);
+  border-radius: 50% / 20px;
+  padding-top: 18px;
+}
+.c4-node.external .c4-box {
+  background: var(--c-external);
+  border-style: dashed;
+  border-color: color-mix(in oklab, var(--fg) 10%, transparent);
+}
 
-.c4-node.zoomable { cursor: zoom-in; }
-.c4-node.zoomable .c4-box { animation: c4glow 2.4s ease-in-out infinite; }
+.c4-node.zoomable {
+  cursor: zoom-in;
+}
+.c4-node.zoomable .c4-box {
+  animation: c4glow 2.8s ease-in-out infinite;
+}
 @keyframes c4glow {
-  0%, 100% { box-shadow: 0 0 0 0 #7cc4ff00, 0 6px 24px #0008; }
-  50% { box-shadow: 0 0 34px 6px #7cc4ff66, 0 6px 24px #0008; }
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 0%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 30px 4px color-mix(in oklab, var(--accent) 16%, transparent);
+  }
 }
 
-/* 图例：C4 要求每张图都有 */
-.c4-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; margin-top: 0.9rem; font-size: 0.85rem; color: var(--muted); }
-.c4-legend span { display: inline-flex; align-items: center; gap: 0.45rem; }
-.sw { display: inline-block; width: 22px; height: 14px; border-radius: 4px; }
-.sw.person { background: var(--person); border-radius: 8px; }
-.sw.system { background: var(--system); }
-.sw.container { background: var(--container); }
-.sw.store { background: var(--store); border-radius: 50% / 5px; }
-.sw.external { background: var(--external); }
-.sw.boundary { border: 1.5px dashed #8aa4c8; }
-.sw.arrow { height: 2px; border-radius: 0; background: #7d8aa3; position: relative; }
+/* 图例：C4 规范要求每张图都有 */
+.c4-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.04em;
+  color: var(--fg-subtle);
+}
+.c4-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.sw {
+  display: inline-block;
+  width: 20px;
+  height: 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in oklab, var(--fg) 14%, transparent);
+}
+.sw.person {
+  background: var(--c-person);
+  border-radius: var(--radius-full);
+}
+.sw.system {
+  background: var(--c-system);
+  border-color: var(--accent-dim);
+}
+.sw.container {
+  background: var(--c-container);
+}
+.sw.store {
+  background: var(--c-store);
+  border-radius: 50% / 5px;
+}
+.sw.external {
+  background: var(--c-external);
+  border-style: dashed;
+}
+.sw.boundary {
+  border: 1.5px dashed var(--color-neutral-500);
+  background: transparent;
+}
+.sw.arrow {
+  height: 2px;
+  border: 0;
+  border-radius: 0;
+  background: var(--c-wire);
+  position: relative;
+}
 .sw.arrow::after {
-  content: ''; position: absolute; right: -2px; top: -4px;
-  border-left: 7px solid #7d8aa3; border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: -4px;
+  border-left: 7px solid var(--c-wire);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
 }

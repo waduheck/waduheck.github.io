@@ -1,0 +1,39 @@
+{
+  "bg":          { "value": "{color.neutral.950}", "comment": "页面底：不用纯黑，纯黑显廉价" },
+  "bg-raised":   { "value": "{color.neutral.900}" },
+  "bg-sunken":   { "value": "{color.neutral.950}" },
+
+  "fg":          { "value": "{color.neutral.100}", "comment": "主文字：不用纯白" },
+  "fg-muted":    { "value": "{color.neutral.300}", "comment": "次要文字：参考站 muted 档" },
+  "fg-subtle":   { "value": "{color.neutral.450}", "comment": "12px 等宽标签也要过 AA" },
+  "fg-strong":   { "value": "{color.neutral.50}" },
+  "fg-inverse":  { "value": "{color.neutral.950}" },
+
+  "line":        { "value": "{color.neutral.600}", "comment": "发丝线：比背景高 1.5 倍才有存在感" },
+  "line-strong": { "value": "{color.neutral.500}", "comment": "hover 时提亮的那一档" },
+
+  "accent":      { "value": "{color.lime.400}" },
+  "accent-dim":  { "value": "{color.lime.700}" },
+  "accent-fg":   { "value": "{color.neutral.950}" },
+  "focus":       { "value": "{color.lime.400}", "comment": "焦点环，唯一允许高亮的交互色" },
+  "warn":        { "value": "{color.amber.400}" },
+
+  "card": {
+    "bg":      { "value": "{color.neutral.850}" },
+    "bg-hover":{ "value": "{color.neutral.800}" },
+    "border":  { "value": "{color.neutral.600}" },
+    "radius":  { "value": "{radius.lg}" }
+  },
+
+  "section": {
+    "gap":     { "value": "{space.32}", "comment": "段落之间的呼吸" },
+    "gap-sm":  { "value": "{space.20}" }
+  },
+
+  "motion": {
+    "interactive": { "value": "{duration.fast} {ease.out}" },
+    "state":       { "value": "{duration.base} {ease.out}" },
+    "reveal":      { "value": "{duration.reveal} {ease.out}" },
+    "zoom":        { "value": "{duration.slow} {ease.spring}" }
+  }
+}

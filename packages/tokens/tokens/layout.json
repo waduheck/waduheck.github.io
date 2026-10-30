@@ -1,0 +1,58 @@
+{
+  "space": {
+    "1":  { "value": "0.25rem" },
+    "2":  { "value": "0.5rem" },
+    "3":  { "value": "0.75rem" },
+    "4":  { "value": "1rem" },
+    "5":  { "value": "1.25rem" },
+    "6":  { "value": "1.5rem" },
+    "8":  { "value": "2rem" },
+    "10": { "value": "2.5rem" },
+    "12": { "value": "3rem" },
+    "16": { "value": "4rem" },
+    "20": { "value": "5rem" },
+    "24": { "value": "6rem" },
+    "32": { "value": "8rem" }
+  },
+
+  "size": {
+    "container":      { "value": "68rem", "comment": "1088px 外层网格" },
+    "container-wide": { "value": "76rem", "comment": "1216px 图形区（C4 需要更宽）" },
+    "prose":          { "value": "34rem", "comment": "544px：卡片正文一行的合理上限，原站 238px 是主因" },
+    "prose-wide":     { "value": "42rem", "comment": "672px：参考站正文常见区间 600–680" },
+    "rule":           { "value": "1px" },
+    "hairline":       { "value": "1px" },
+    "tap":            { "value": "44px", "comment": "最小可点区域" }
+  },
+
+  "radius": {
+    "none": { "value": "0px" },
+    "sm":   { "value": "3px" },
+    "md":   { "value": "10px" },
+    "lg":   { "value": "18px" },
+    "full": { "value": "999px" }
+  },
+
+  "duration": {
+    "fast": { "value": "140ms" },
+    "base": { "value": "260ms" },
+    "slow": { "value": "520ms", "comment": "只给 C4 缩放用" },
+    "reveal": { "value": "700ms", "comment": "滚动入场，带 stagger" }
+  },
+
+  "ease": {
+    "out":    { "value": "cubic-bezier(0.22, 1, 0.36, 1)" },
+    "inout":  { "value": "cubic-bezier(0.65, 0, 0.35, 1)" },
+    "spring": { "value": "cubic-bezier(0.34, 1.46, 0.64, 1)" }
+  },
+
+  "stagger": {
+    "step": { "value": "70ms" }
+  },
+
+  "z": {
+    "base":    { "value": "0" },
+    "raised":  { "value": "10" },
+    "overlay": { "value": "100" }
+  }
+}

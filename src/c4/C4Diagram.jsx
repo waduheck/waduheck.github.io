@@ -117,10 +117,9 @@ export default function C4Diagram() {
   return (
     <section className="c4">
       <div className="c4-head">
-        <div>
-          <h2>{L.title}</h2>
-          <p className="c4-sub">{L.subtitle}</p>
-        </div>
+        <p className="c4-sub">
+          {L.title} — {L.subtitle}
+        </p>
         <div className="c4-levels">
           <button className={level === 'context' ? 'sel' : ''} onClick={() => setLevel('context')}>1 · Context</button>
           <button className={level === 'container' ? 'sel' : ''} onClick={() => setLevel('container')}>2 · Containers</button>

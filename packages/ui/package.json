@@ -1,0 +1,13 @@
+{
+  "name": "@portfolio/ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "组件层：只消费 semantic 令牌，不直接引用原始色阶",
+  "exports": {
+    "./src": "./src/index.js"
+  },
+  "peerDependencies": {
+    "react": ">=19"
+  }
+}
