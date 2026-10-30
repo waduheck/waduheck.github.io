@@ -1,6 +1,17 @@
-import { Hero, Section, WorkRow, WorkCard, Prose, Reveal, Label } from '@portfolio/ui/src';
+import { useEffect, useState } from 'react';
+import {
+  Hero,
+  Section,
+  WorkRow,
+  WorkCard,
+  Prose,
+  Reveal,
+  Label,
+  LanguageToggle,
+} from '@portfolio/ui/src';
 import C4Diagram from './c4/C4Diagram.jsx';
-import { profile, works, sections, education } from './content.js';
+import { copy } from './content.js';
+import { LOCALES, detectLocale, rememberLocale, htmlLangOf, applyMeta } from './i18n.js';
 
 // 两种布局共用同一套组件与令牌，只有编排不同：
 //   A（默认）= 对账表：发丝线 + 序号 + 量化条，没有盒子
@@ -9,7 +20,7 @@ import { profile, works, sections, education } from './content.js';
 const variant = new URLSearchParams(window.location.search).get('v') === 'b' ? 'b' : 'a';
 const pad = (n) => String(n + 1).padStart(2, '0');
 
-function Works() {
+function Works({ works }) {
   if (variant === 'b') {
     return (
       <div className="works--bento">
@@ -33,26 +44,56 @@ function Works() {
 }
 
 export default function App() {
+  // 首次渲染前就定好语言，避免先闪一下中文再跳成英文
+  const [locale, setLocale] = useState(detectLocale);
+  const t = copy[locale] ?? copy.en;
+
+  useEffect(() => {
+    applyMeta({ ...t.meta, htmlLang: htmlLangOf(locale) });
+  }, [locale, t]);
+
+  const changeLocale = (next) => {
+    rememberLocale(next);
+    setLocale(next);
+  };
+
   return (
     <main className="page">
-      <Hero {...profile} />
+      <Hero
+        {...t.profile}
+        actions={
+          <LanguageToggle
+            value={locale}
+            onChange={changeLocale}
+            options={LOCALES}
+            label={t.ui.language}
+          />
+        }
+        contactLabel={t.ui.contact}
+      />
 
-      <Section id="work" index={sections.work.index} title={sections.work.title} kicker={sections.work.kicker}>
-        <Works />
+      <Section
+        id="work"
+        index={t.sections.work.index}
+        title={t.sections.work.title}
+        kicker={t.sections.work.kicker}
+      >
+        <Works works={t.works} />
       </Section>
 
       <Section
         id="system"
-        index={sections.system.index}
-        title={sections.system.title}
-        kicker={sections.system.kicker}
+        index={t.sections.system.index}
+        title={t.sections.system.title}
+        kicker={t.sections.system.kicker}
       >
-        <C4Diagram />
+        {/* key 让切换语言时整张图重建，避免残留上一语言的标签 */}
+        <C4Diagram key={locale} locale={locale} />
       </Section>
 
-      <Section id="education" index={sections.education.index} title={sections.education.title}>
+      <Section id="education" index={t.sections.education.index} title={t.sections.education.title}>
         <div className="edu">
-          {education.map((e) => (
+          {t.education.map((e) => (
             <Reveal key={e.degree} className="edu__item">
               <h3 className="edu__degree">{e.degree}</h3>
               <Prose className="edu__meta">
@@ -64,7 +105,7 @@ export default function App() {
       </Section>
 
       <footer className="foot">
-        <Label>Design tokens · Storybook component library</Label>
+        <Label>{t.footer}</Label>
       </footer>
     </main>
   );

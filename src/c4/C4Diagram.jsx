@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { levels, SIZE, typeLine } from './model.js';
+import { getLevels, getText, SIZE, typeLine } from './model.js';
 import './c4.css';
 
 // 从 a 的中心朝 b 的中心出发，落在 a 的边框外 pad 像素处。
@@ -11,7 +11,7 @@ function edge(a, b, pad) {
   return { x: a.x + dx * s + (dx / len) * pad, y: a.y + dy * s + (dy / len) * pad };
 }
 
-function Diagram({ lv, onZoom }) {
+function Diagram({ lv, onZoom, locale, text }) {
   const [hover, setHover] = useState(null);
   const els = Object.fromEntries(lv.elements.map((e) => [e.id, { ...SIZE[e.kind], ...e }]));
   const touches = (r) => r.from === hover || r.to === hover;
@@ -81,9 +81,9 @@ function Diagram({ lv, onZoom }) {
           <foreignObject x={e.x - e.w / 2} y={e.y - e.h / 2} width={e.w} height={e.h}>
             <div className="c4-box">
               <b>{e.name}</b>
-              <i>{typeLine(e)}</i>
+              <i>{typeLine(e, locale)}</i>
               <p>{e.desc}</p>
-              {e.zoom && <em>click to zoom in ⤢</em>}
+              {e.zoom && <em>{text.zoomHint}</em>}
             </div>
           </foreignObject>
         </g>
@@ -92,27 +92,29 @@ function Diagram({ lv, onZoom }) {
   );
 }
 
-function Legend() {
+function Legend({ legend }) {
   const items = [
-    ['person', 'Person'],
-    ['system', 'Software system in scope'],
-    ['container', 'Container (app / service)'],
-    ['store', 'Data store'],
-    ['external', 'External system'],
-    ['boundary', 'System boundary'],
+    ['person', legend.person],
+    ['system', legend.system],
+    ['container', legend.container],
+    ['store', legend.store],
+    ['external', legend.external],
+    ['boundary', legend.boundary],
   ];
   return (
     <div className="c4-legend">
       {items.map(([k, l]) => (
         <span key={k}><i className={`sw ${k}`} />{l}</span>
       ))}
-      <span><i className="sw arrow" />Relationship [technology]; moving dots show direction</span>
+      <span><i className="sw arrow" />{legend.relation}</span>
     </div>
   );
 }
 
-export default function C4Diagram() {
+export default function C4Diagram({ locale = 'en' }) {
   const [level, setLevel] = useState('context');
+  const levels = getLevels(locale);
+  const text = getText(locale);
   const L = levels[level];
   return (
     <section className="c4">
@@ -121,21 +123,25 @@ export default function C4Diagram() {
           {L.title} — {L.subtitle}
         </p>
         <div className="c4-levels">
-          <button className={level === 'context' ? 'sel' : ''} onClick={() => setLevel('context')}>1 · Context</button>
-          <button className={level === 'container' ? 'sel' : ''} onClick={() => setLevel('container')}>2 · Containers</button>
-          <button disabled title="coming soon">3 · Components</button>
+          <button className={level === 'context' ? 'sel' : ''} onClick={() => setLevel('context')}>
+            {text.buttons.context}
+          </button>
+          <button className={level === 'container' ? 'sel' : ''} onClick={() => setLevel('container')}>
+            {text.buttons.container}
+          </button>
+          <button disabled>{text.buttons.components}</button>
         </div>
       </div>
       <div className="c4-scroll">
         <div className="c4-stage">
           {Object.values(levels).map((lv) => (
             <div key={lv.id} className={`c4-layer ${lv.id} ${level === lv.id ? 'active' : 'inactive'}`}>
-              <Diagram lv={lv} onZoom={() => setLevel('container')} />
+              <Diagram lv={lv} onZoom={() => setLevel('container')} locale={locale} text={text} />
             </div>
           ))}
         </div>
       </div>
-      <Legend />
+      <Legend legend={text.legend} />
     </section>
   );
 }
