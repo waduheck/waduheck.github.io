@@ -1,34 +1,77 @@
 {
-  "bg":          { "value": "{color.paper.base}", "comment": "暖白纸，不用纯白" },
-  "bg-raised":   { "value": "{color.paper.raised}" },
-  "bg-sunken":   { "value": "{color.paper.sunken}" },
-
-  "fg":          { "value": "{color.ink.base}", "comment": "暖黑，不用纯黑" },
-  "fg-muted":    { "value": "{color.ink.muted}" },
-  "fg-subtle":   { "value": "{color.ink.subtle}", "comment": "小号字下限，实测 5.15:1" },
-  "fg-strong":   { "value": "{color.ink.strong}" },
-  "fg-inverse":  { "value": "{color.paper.base}" },
-
-  "line":        { "value": "{color.rule.base}", "comment": "发丝线 1.6:1：看得出，不抢内容" },
-  "line-strong": { "value": "{color.rule.strong}" },
-  "line-faint":  { "value": "{color.rule.faint}" },
-
-  "accent":      { "value": "{color.vermilion.base}", "comment": "朱砂：序号、链接、焦点环，全站唯一的彩色" },
-  "accent-deep": { "value": "{color.vermilion.deep}" },
-  "accent-wash": { "value": "{color.vermilion.wash}" },
-  "accent-fg":   { "value": "{color.static.white}" },
-  "focus":       { "value": "{color.vermilion.base}" },
-
-  "surface": {
-    "bg":     { "value": "{color.paper.raised}" },
-    "border": { "value": "{color.rule.base}" },
-    "radius": { "value": "{radius.md}" }
+  "bg": {
+    "value": "{color.paper.base}"
   },
-
+  "bg-raised": {
+    "value": "{color.paper.raised}"
+  },
+  "bg-sunken": {
+    "value": "{color.paper.sunken}"
+  },
+  "fg": {
+    "value": "{color.ink.base}"
+  },
+  "fg-muted": {
+    "value": "{color.ink.muted}"
+  },
+  "fg-subtle": {
+    "value": "{color.ink.subtle}"
+  },
+  "fg-strong": {
+    "value": "{color.ink.strong}"
+  },
+  "fg-inverse": {
+    "value": "{color.paper.base}"
+  },
+  "line": {
+    "value": "{color.rule.base}"
+  },
+  "line-strong": {
+    "value": "{color.rule.strong}"
+  },
+  "line-faint": {
+    "value": "{color.rule.faint}"
+  },
+  "accent": {
+    "value": "{color.bronze.base}",
+    "comment": "文字与数据"
+  },
+  "accent-soft": {
+    "value": "{color.bronze.soft}",
+    "comment": "只做装饰线"
+  },
+  "accent-wash": {
+    "value": "{color.bronze.wash}"
+  },
+  "accent-fg": {
+    "value": "{color.static.white}"
+  },
+  "focus": {
+    "value": "{color.bronze.base}"
+  },
+  "surface": {
+    "bg": {
+      "value": "{color.paper.raised}"
+    },
+    "border": {
+      "value": "{color.rule.base}"
+    },
+    "radius": {
+      "value": "{radius.md}"
+    }
+  },
   "motion": {
-    "interactive": { "value": "{duration.fast} {ease.out}" },
-    "state":       { "value": "{duration.base} {ease.out}" },
-    "reveal":      { "value": "{duration.reveal} {ease.out}" },
-    "zoom":        { "value": "{duration.slow} {ease.spring}" }
+    "interactive": {
+      "value": "{duration.fast} {ease.out}"
+    },
+    "state": {
+      "value": "{duration.base} {ease.out}"
+    },
+    "reveal": {
+      "value": "{duration.reveal} {ease.out}"
+    },
+    "zoom": {
+      "value": "{duration.slow} {ease.spring}"
+    }
   }
 }

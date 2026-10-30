@@ -40,7 +40,7 @@
   color: var(--fg-subtle);
 }
 .tok__use { text-align: right; }
-.tok__bar { height: 10px; background: var(--accent-deep); border-radius: var(--radius-sm); }
+.tok__bar { height: 10px; background: var(--accent-soft); border-radius: var(--radius-sm); }
 .tok__group { margin-top: var(--space-4); }
 .tok__swatches { display: flex; flex-wrap: wrap; gap: var(--space-4); }
 .tok__sw { display: flex; flex-direction: column; gap: var(--space-1); width: 9rem; }

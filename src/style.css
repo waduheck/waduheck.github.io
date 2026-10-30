@@ -50,6 +50,7 @@ svg {
 
 .works {
   display: grid;
+  border-bottom: var(--size-hairline) solid var(--line-faint);
 }
 
 /* Storybook 画布：给故事一个和页面一致的纸面 */

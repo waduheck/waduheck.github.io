@@ -19,17 +19,17 @@ const links = [
 export const copy = {
   zh: {
     meta: {
-      title: '王逸浩 · 软件工程师',
+      title: '王逸浩 / 软件工程师',
       description:
         '王逸浩（Ethan）——可靠的 LLM Agent：契约定义的工具体系、可执行的 oracle、能真的拦下改动的发布闸门。',
-      ogTitle: '王逸浩 · 软件工程师',
+      ogTitle: '王逸浩 / 软件工程师',
       ogDescription: '契约定义的工具体系、差分 oracle、能真的拦下改动的发布闸门。',
       ogLocale: 'zh_CN',
     },
     profile: {
       eyebrow: '作品集 — 2026',
       name: '王逸浩',
-      role: '软件工程师 · LLM Agent 基础设施',
+      role: '软件工程师 / LLM Agent 基础设施',
       tagline:
         '我做可靠的 LLM Agent。用一份契约定义它可调用的工具；用可执行的 oracle 和发布闸门，' +
         '决定它写出来的东西能不能上线。',
@@ -111,7 +111,7 @@ export const copy = {
         from: '2022-09',
         to: '2026-06',
         title: '杭州电子科技大学',
-        role: '计算机科学与技术 · 工学学士',
+        role: '计算机科学与技术 / 工学学士',
         note: 'GPA 82.10 / 100',
       },
       {
@@ -127,7 +127,7 @@ export const copy = {
         to: '2026-08',
         title: '浙江绿洲制冷设备有限公司',
         role: '程序员',
-        note: '台州 · 工厂数字化：WMS 数据库、ERP 物料主数据、生产与在制报表',
+        note: '台州 / 工厂数字化：WMS 数据库、ERP 物料主数据、生产与在制报表',
       },
       {
         period: '2026.09 — 至今',
@@ -135,17 +135,17 @@ export const copy = {
         current: true,
         title: '元序科技',
         role: '软件工程师',
-        note: '远程 · 多租户团队协作平台：任务图、文档、会议、台账，以及内嵌的 Agent',
+        note: '远程 / 多租户团队协作平台：任务图、文档、会议、台账，以及内嵌的 Agent',
       },
     ],
 
     awardsLabel: '奖项',
     awards: [
-      { at: '2024-08', period: '2024.08', text: '中国大学生服务外包创新创业大赛 · 全国二等奖（企业命题类）' },
-      { at: '2024-11', period: '2024.11', text: '全国大学生数学建模竞赛 · 浙江省三等奖' },
-      { at: '2025-06', period: '2025', text: '中国大学生服务外包创新创业大赛 · 东部区域赛三等奖' },
+      { at: '2024-08', period: '2024.08', text: '中国大学生服务外包创新创业大赛 / 全国二等奖（企业命题类）' },
+      { at: '2024-11', period: '2024.11', text: '全国大学生数学建模竞赛 / 浙江省三等奖' },
+      { at: '2025-06', period: '2025', text: '中国大学生服务外包创新创业大赛 / 东部区域赛三等奖' },
     ],
-    footer: '设计令牌驱动 · Storybook 组件库',
+    footer: '设计令牌驱动 / Storybook 组件库',
     ui: { language: '语言', contact: '联系方式' },
   },
 
@@ -163,7 +163,7 @@ export const copy = {
     profile: {
       eyebrow: 'Portfolio — 2026',
       name: 'Yihao (Ethan) Wang',
-      role: 'Software engineer · LLM agent infrastructure',
+      role: 'Software engineer / LLM agent infrastructure',
       tagline:
         'I build reliable LLM agents. One contract defines the tools an agent may call; executable oracles and ' +
         'release gates decide whether what it wrote is allowed to ship.',
@@ -270,7 +270,7 @@ export const copy = {
         to: '2026-08',
         title: 'Zhejiang Lvzhou Refrigeration',
         role: 'Programmer',
-        note: 'Taizhou · factory digitalisation: WMS database, ERP material master, production reporting',
+        note: 'Taizhou / factory digitalisation: WMS database, ERP material master, production reporting',
       },
       {
         period: 'Sep 2026 — present',
@@ -278,7 +278,7 @@ export const copy = {
         current: true,
         title: 'Yuansu Technology',
         role: 'Software engineer',
-        note: 'Remote · multi-tenant team platform: task graph, docs, meetings, ledger, embedded agent',
+        note: 'Remote / multi-tenant team platform: task graph, docs, meetings, ledger, embedded agent',
       },
     ],
 
@@ -288,7 +288,7 @@ export const copy = {
       { at: '2024-11', period: 'Nov 2024', text: 'China Undergraduate Mathematical Contest in Modelling — Zhejiang 3rd prize' },
       { at: '2025-06', period: '2025', text: 'Same competition, East China regional round — 3rd prize' },
     ],
-    footer: 'Design tokens · Storybook component library',
+    footer: 'Design tokens / Storybook component library',
     ui: { language: 'Language', contact: 'Contact' },
   },
 };

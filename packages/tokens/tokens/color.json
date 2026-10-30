@@ -1,29 +1,64 @@
 {
   "color": {
     "paper": {
-      "base":   { "value": "#F5F2EA", "comment": "页面底：暖白纸，不是纯白" },
-      "raised": { "value": "#FBFAF6", "comment": "极少量需要抬起来的面" },
-      "sunken": { "value": "#EDE9DE" }
+      "base": {
+        "value": "#E8E5E1",
+        "comment": "参考 Rhine Lab：暖灰纸，不用纯白"
+      },
+      "raised": {
+        "value": "#EFECE7"
+      },
+      "sunken": {
+        "value": "#DFDBD5"
+      }
     },
     "ink": {
-      "base":   { "value": "#17150F", "comment": "正文：暖黑，不是纯黑" },
-      "muted":  { "value": "#55504A" },
-      "subtle": { "value": "#6B655D", "comment": "小号字下限，实测 5.15:1" },
-      "strong": { "value": "#0B0A07" }
+      "base": {
+        "value": "#0B0D0B",
+        "comment": "近黑但不纯黑，实测 15.5:1"
+      },
+      "strong": {
+        "value": "#050605"
+      },
+      "muted": {
+        "value": "#5F5B53"
+      },
+      "subtle": {
+        "value": "#635F57"
+      }
     },
     "rule": {
-      "base":   { "value": "#C9C1AF" },
-      "strong": { "value": "#A9A08B" },
-      "faint":  { "value": "#E2DCD0" }
+      "base": {
+        "value": "#C4BFB4",
+        "comment": "发丝线 1.55:1，和参考同档"
+      },
+      "strong": {
+        "value": "#A8A29A"
+      },
+      "faint": {
+        "value": "#DCD8D1"
+      }
     },
-    "vermilion": {
-      "base":  { "value": "#A23B22", "comment": "朱砂：全站唯一强调色，5.89:1" },
-      "deep":  { "value": "#8E3520" },
-      "wash":  { "value": "#E4D3C8", "comment": "强调的极浅底，只用于选中态" }
+    "bronze": {
+      "base": {
+        "value": "#7E5C2B",
+        "comment": "暖杏金：文字与数据用，4.84:1"
+      },
+      "soft": {
+        "value": "#A67D48",
+        "comment": "只做装饰线条；2.96:1 不用于文字"
+      },
+      "wash": {
+        "value": "#DCD1BE"
+      }
     },
     "static": {
-      "white": { "value": "#FFFFFF" },
-      "black": { "value": "#000000" }
+      "white": {
+        "value": "#FFFFFF"
+      },
+      "black": {
+        "value": "#000000"
+      }
     }
   }
 }

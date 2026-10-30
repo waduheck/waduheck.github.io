@@ -1,52 +1,108 @@
 {
   "font": {
-    "serif": {
-      "value": "\"Source Serif 4\", \"Iowan Old Style\", Charter, \"Songti SC\", \"Source Han Serif SC\", \"Noto Serif CJK SC\", STSong, Georgia, serif",
-      "comment": "标题用衬线：拉丁走 Source Serif / Iowan，中文走宋体"
+    "display": {
+      "value": "\"Helvetica Neue\", \"SF Pro Display\", -apple-system, Inter, \"PingFang SC\", \"Microsoft YaHei\", system-ui, sans-serif"
     },
     "sans": {
-      "value": "-apple-system, \"SF Pro Text\", \"Segoe UI Variable Text\", Inter, \"PingFang SC\", \"Hiragino Sans GB\", \"Noto Sans CJK SC\", system-ui, sans-serif"
+      "value": "-apple-system, \"SF Pro Text\", \"Helvetica Neue\", Inter, \"PingFang SC\", \"Microsoft YaHei\", system-ui, sans-serif"
     },
     "mono": {
-      "value": "\"SF Mono\", ui-monospace, \"JetBrains Mono\", Menlo, Consolas, monospace",
-      "comment": "只给数字和代码用，不再承担全站标签"
+      "value": "\"SF Mono\", ui-monospace, Menlo, Consolas, monospace",
+      "comment": "只给数字与代码"
     }
   },
-
   "weight": {
-    "regular":  { "value": "400" },
-    "medium":   { "value": "500" },
-    "semibold": { "value": "600" },
-    "bold":     { "value": "700" }
+    "light": {
+      "value": "300",
+      "comment": "大号数字用细体，是这套视觉的签名动作"
+    },
+    "regular": {
+      "value": "400"
+    },
+    "medium": {
+      "value": "500"
+    },
+    "semibold": {
+      "value": "600"
+    },
+    "bold": {
+      "value": "700"
+    }
   },
-
   "text": {
-    "display": { "value": "clamp(2.5rem, 5.9vw, 4.75rem)", "comment": "40–76px 衬线大标题" },
-    "title":   { "value": "clamp(1.5rem, 2.1vw, 1.875rem)", "comment": "24–30px 章节标题" },
-    "item":    { "value": "clamp(1.25rem, 1.6vw, 1.5rem)", "comment": "20–24px 条目标题" },
-    "heading": { "value": "1.125rem", "comment": "18px 小标题" },
-    "body":    { "value": "1.0625rem", "comment": "17px 正文" },
-    "small":   { "value": "0.9375rem", "comment": "15px 次要正文" },
-    "label":   { "value": "0.8125rem", "comment": "13px 标签（不再全大写等宽）" },
-    "figure":  { "value": "clamp(1.5rem, 2.2vw, 2rem)", "comment": "24–32px 数字" }
+    "display": {
+      "value": "clamp(2.25rem, 5.6vw, 4.5rem)",
+      "comment": "36–72px 粗体大标题"
+    },
+    "title": {
+      "value": "clamp(1.375rem, 2.1vw, 1.75rem)",
+      "comment": "20–26px 章节标题"
+    },
+    "item": {
+      "value": "clamp(1.0625rem, 1.35vw, 1.25rem)",
+      "comment": "17–20px 条目标题"
+    },
+    "heading": {
+      "value": "1rem"
+    },
+    "body": {
+      "value": "1.0625rem"
+    },
+    "small": {
+      "value": "0.9375rem"
+    },
+    "label": {
+      "value": "0.75rem",
+      "comment": "12px 微标签"
+    },
+    "figure": {
+      "value": "clamp(1.5rem, 2.1vw, 2rem)",
+      "comment": "28–36px 细体数字"
+    }
   },
-
   "leading": {
-    "display": { "value": "1.04", "comment": "衬线大标题：1.04 比 1.6 紧得多，但仍留出字面空间" },
-    "title":   { "value": "1.2" },
-    "item":    { "value": "1.3" },
-    "heading": { "value": "1.4" },
-    "body":    { "value": "1.78", "comment": "纸面阅读需要更松的行距" },
-    "small":   { "value": "1.72" },
-    "label":   { "value": "1.5" }
+    "display": {
+      "value": "1.04"
+    },
+    "title": {
+      "value": "1.2"
+    },
+    "item": {
+      "value": "1.32"
+    },
+    "heading": {
+      "value": "1.45"
+    },
+    "body": {
+      "value": "1.78"
+    },
+    "small": {
+      "value": "1.72"
+    },
+    "label": {
+      "value": "1.5"
+    }
   },
-
   "tracking": {
-    "display": { "value": "-0.018em", "comment": "中英混排取折中，中文不吃太负的字距" },
-    "title":   { "value": "-0.012em" },
-    "item":    { "value": "-0.008em" },
-    "heading": { "value": "0em" },
-    "body":    { "value": "0em" },
-    "label":   { "value": "0.05em" }
+    "display": {
+      "value": "-0.02em",
+      "comment": "大字收紧"
+    },
+    "title": {
+      "value": "-0.012em"
+    },
+    "item": {
+      "value": "-0.008em"
+    },
+    "heading": {
+      "value": "0em"
+    },
+    "body": {
+      "value": "0em"
+    },
+    "label": {
+      "value": "0.08em",
+      "comment": "小字放开：大字负、小字正，是这套系统的可靠标志"
+    }
   }
 }
