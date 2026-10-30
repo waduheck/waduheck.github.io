@@ -1,17 +1,14 @@
-import Label from './Label.jsx';
-import Prose from './Prose.jsx';
 import Stat from './Stat.jsx';
 
-// 布局 A「对账表」：没有卡片盒子，靠发丝线和留白分隔。
-export default function WorkRow({ index, title, body, stats = [] }) {
+// 一条作品：左栏标题，右栏正文与量化。不用卡片盒子，用发丝线分条目。
+export default function WorkRow({ title, body, stats = [] }) {
   return (
-    <article className="row">
-      <Label className="row__index">{index}</Label>
-      <div className="row__main">
-        <h3 className="row__title">{title}</h3>
-        <Prose className="row__body">{body}</Prose>
+    <article className="item">
+      <h3 className="item__title">{title}</h3>
+      <div className="item__main">
+        <p className="item__body">{body}</p>
         {stats.length ? (
-          <div className="row__stats">
+          <div className="item__stats">
             {stats.map((s) => (
               <Stat key={s.label} value={s.value} label={s.label} />
             ))}

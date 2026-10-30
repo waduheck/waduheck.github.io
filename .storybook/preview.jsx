@@ -1,5 +1,5 @@
 import '@portfolio/tokens/css';
-import '../packages/ui/src/ui.css';
+import '../packages/ui/src/editorial.css';
 import '../src/style.css';
 
 /** @type { import('@storybook/react-vite').Preview } */

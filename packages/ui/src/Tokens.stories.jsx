@@ -13,7 +13,7 @@ const TYPE = [
 const COLOR_GROUPS = [
   ['表面', ['--bg', '--bg-raised', '--card-bg', '--line']],
   ['文字', ['--fg-strong', '--fg', '--fg-muted', '--fg-subtle']],
-  ['强调', ['--accent', '--accent-dim', '--focus', '--warn']],
+  ['强调', ['--accent', '--accent-deep', '--focus', '--warn']],
 ];
 
 const SPACE = ['2', '3', '4', '6', '8', '10', '12', '16', '20', '24', '32'];

@@ -6,8 +6,7 @@ export default {
   args: { value: '180', label: 'operations' },
 };
 
-export const Medium = {};
-export const Large = { args: { size: 'lg' } };
+export const Single = {};
 export const Strip = {
   render: () => (
     <div style={{ display: 'flex', gap: 'var(--space-10)', flexWrap: 'wrap' }}>

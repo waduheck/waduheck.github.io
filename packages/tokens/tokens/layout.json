@@ -12,14 +12,19 @@
     "16": { "value": "4rem" },
     "20": { "value": "5rem" },
     "24": { "value": "6rem" },
-    "32": { "value": "8rem" }
+    "32": { "value": "8rem" },
+    "40": { "value": "10rem" },
+    "48": { "value": "12rem" },
+    "64": { "value": "16rem" }
   },
 
   "size": {
-    "container":      { "value": "68rem", "comment": "1088px 外层网格" },
-    "container-wide": { "value": "76rem", "comment": "1216px 图形区（C4 需要更宽）" },
-    "prose":          { "value": "34rem", "comment": "544px：卡片正文一行的合理上限，原站 238px 是主因" },
-    "prose-wide":     { "value": "42rem", "comment": "672px：参考站正文常见区间 600–680" },
+    "container":      { "value": "76rem", "comment": "1216px 外层（含左轨道）" },
+    "container-wide": { "value": "84rem", "comment": "1344px 图形区" },
+    "measure":        { "value": "33rem", "comment": "528px：两栏条目里正文栏的宽度" },
+    "measure-wide":   { "value": "42rem", "comment": "672px：单栏正文上限" },
+    "rail":           { "value": "4.5rem", "comment": "72px：左轨道（序号、标签）" },
+    "gutter":         { "value": "3rem", "comment": "48px：栏间距" },
     "rule":           { "value": "1px" },
     "hairline":       { "value": "1px" },
     "tap":            { "value": "44px", "comment": "最小可点区域" }
@@ -27,17 +32,17 @@
 
   "radius": {
     "none": { "value": "0px" },
-    "sm":   { "value": "3px" },
-    "md":   { "value": "10px" },
-    "lg":   { "value": "18px" },
+    "sm":   { "value": "2px" },
+    "md":   { "value": "4px" },
+    "lg":   { "value": "8px" },
     "full": { "value": "999px" }
   },
 
   "duration": {
-    "fast": { "value": "140ms" },
-    "base": { "value": "260ms" },
-    "slow": { "value": "520ms", "comment": "只给 C4 缩放用" },
-    "reveal": { "value": "700ms", "comment": "滚动入场，带 stagger" }
+    "fast":   { "value": "140ms" },
+    "base":   { "value": "240ms" },
+    "slow":   { "value": "520ms", "comment": "只给 C4 缩放用" },
+    "reveal": { "value": "900ms", "comment": "纸面阅读的入场可以慢一点" }
   },
 
   "ease": {
@@ -47,7 +52,7 @@
   },
 
   "stagger": {
-    "step": { "value": "70ms" }
+    "step": { "value": "80ms" }
   },
 
   "z": {
