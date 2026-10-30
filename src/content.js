@@ -46,7 +46,11 @@ export const copy = {
         title: '系统架构',
         kicker: '这套作品所在平台的 C4 模型。点中间的方框可以放大看里面的容器。',
       },
-      education: { index: '03', title: '教育背景' },
+      timeline: {
+        index: '03',
+        title: '时间线',
+        kicker: '按时间倒序。最上面那一段，就是这套系统还在做的地方。',
+      },
     },
     works: [
       {
@@ -101,7 +105,40 @@ export const copy = {
         ],
       },
     ],
-    education: [{ degree: '计算机科学与技术 · 工学学士', school: '杭州电子科技大学', year: '2026' }],
+    timeline: [
+      {
+        period: '2026.09 — 至今',
+        title: '元序科技',
+        role: '软件工程师',
+        note: '远程 · 多租户团队协作平台：任务图、文档、会议、台账，以及内嵌的 Agent',
+        current: true,
+      },
+      {
+        period: '2026.06 — 2026.08',
+        title: '浙江绿洲制冷设备有限公司',
+        role: '程序员',
+        note: '台州 · 工厂数字化：WMS 数据库、ERP 物料主数据、生产与在制报表',
+      },
+      {
+        period: '2025',
+        title: '虹软科技 ArcSoft',
+        role: '算法实习生',
+        note: '用 LLM 解析工单流转并自动执行复现脚本；实习期内获破格晋升',
+      },
+      {
+        period: '2022.09 — 2026.06',
+        title: '杭州电子科技大学',
+        role: '计算机科学与技术 · 工学学士',
+        note: 'GPA 82.10 / 100',
+      },
+    ],
+
+    awardsLabel: '奖项',
+    awards: [
+      { period: '2024.08', text: '中国大学生服务外包创新创业大赛 · 全国二等奖（企业命题类）' },
+      { period: '2025', text: '中国大学生服务外包创新创业大赛 · 东部区域赛三等奖' },
+      { period: '2024.11', text: '全国大学生数学建模竞赛 · 浙江省三等奖' },
+    ],
     footer: '设计令牌驱动 · Storybook 组件库',
     ui: { language: '语言', contact: '联系方式' },
   },
@@ -140,7 +177,11 @@ export const copy = {
         kicker:
           'C4 model of the platform this work lives in. Click the system box to zoom into its containers.',
       },
-      education: { index: '03', title: 'Education' },
+      timeline: {
+        index: '03',
+        title: 'Timeline',
+        kicker: 'Newest first. The top entry is where this system is still being built.',
+      },
     },
     works: [
       {
@@ -201,8 +242,39 @@ export const copy = {
         ],
       },
     ],
-    education: [
-      { degree: 'B.Eng. in Computer Science', school: 'Hangzhou Dianzi University', year: '2026' },
+    timeline: [
+      {
+        period: 'Sep 2026 — present',
+        title: 'Yuansu Technology',
+        role: 'Software engineer',
+        note: 'Remote · multi-tenant team platform: task graph, docs, meetings, ledger, embedded agent',
+        current: true,
+      },
+      {
+        period: 'Jun 2026 — Aug 2026',
+        title: 'Zhejiang Lvzhou Refrigeration',
+        role: 'Programmer',
+        note: 'Taizhou · factory digitalisation: WMS database, ERP material master, production reporting',
+      },
+      {
+        period: '2025',
+        title: 'ArcSoft',
+        role: 'Algorithm intern',
+        note: 'LLM parsing of ticket flow plus automated reproduction scripts; promoted ahead of schedule',
+      },
+      {
+        period: 'Sep 2022 — Jun 2026',
+        title: 'Hangzhou Dianzi University',
+        role: 'B.Eng. in Computer Science',
+        note: 'GPA 82.10 / 100',
+      },
+    ],
+
+    awardsLabel: 'Awards',
+    awards: [
+      { period: 'Aug 2024', text: 'China Service Outsourcing Innovation Competition — national 2nd prize' },
+      { period: '2025', text: 'Same competition, East China regional round — 3rd prize' },
+      { period: 'Nov 2024', text: 'China Undergraduate Mathematical Contest in Modelling — Zhejiang 3rd prize' },
     ],
     footer: 'Design tokens · Storybook component library',
     ui: { language: 'Language', contact: 'Contact' },

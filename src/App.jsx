@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Hero, Section, WorkRow, Reveal, Label, LanguageToggle } from '@portfolio/ui/src';
+import { Hero, Section, WorkRow, Timeline, Reveal, Label, LanguageToggle } from '@portfolio/ui/src';
 import C4Diagram from './c4/C4Diagram.jsx';
 import { copy } from './content.js';
 import { LOCALES, detectLocale, rememberLocale, htmlLangOf, applyMeta } from './i18n.js';
@@ -66,21 +66,15 @@ export default function App() {
         <C4Diagram key={locale} locale={locale} />
       </Section>
 
-      <Section id="education" index={t.sections.education.index} title={t.sections.education.title}>
-        <div className="works">
-          {t.education.map((e, i) => (
-            <Reveal key={e.degree} delay={stagger(i)}>
-              <article className="item">
-                <h3 className="item__title">{e.degree}</h3>
-                <div className="item__main">
-                  <p className="item__body">
-                    {e.school} · {e.year}
-                  </p>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+      <Section
+        id="timeline"
+        index={t.sections.timeline.index}
+        title={t.sections.timeline.title}
+        kicker={t.sections.timeline.kicker}
+      >
+        <Reveal>
+          <Timeline items={t.timeline} awardsLabel={t.awardsLabel} awards={t.awards} />
+        </Reveal>
       </Section>
 
       <footer className="foot">

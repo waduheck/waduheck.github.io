@@ -6,6 +6,7 @@ export { default as Link } from './Link.jsx';
 export { default as Prose } from './Prose.jsx';
 export { default as Section } from './Section.jsx';
 export { default as WorkRow } from './WorkRow.jsx';
+export { default as Timeline } from './Timeline.jsx';
 export { default as Hero } from './Hero.jsx';
 export { default as LanguageToggle } from './LanguageToggle.jsx';
 import './editorial.css';
