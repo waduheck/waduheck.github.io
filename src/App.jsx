@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Archive, Record as RecordView, LanguageToggle, Link } from '@portfolio/ui/src';
+import { Cabinet, Record as RecordView, LanguageToggle, Link } from '@portfolio/ui/src';
 import C4Diagram from './c4/C4Diagram.jsx';
 import { copy } from './records.js';
 import { LOCALES, detectLocale, rememberLocale, htmlLangOf, applyMeta } from './i18n.js';
@@ -53,11 +53,11 @@ export default function App() {
         </nav>
       </div>
 
-      <Archive
+      <Cabinet
         key={locale}
-        items={t.records}
+        columns={t.columns}
+        records={t.records}
         hint={t.ui.browseHint}
-        openLabel={t.ui.open}
         onOpen={(r) => setOpenId(r.id)}
       />
 

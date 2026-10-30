@@ -31,10 +31,17 @@ export const copy = {
       links,
     },
 
+    columns: [
+      { key: 'system', label: '系统' },
+      { key: 'work', label: '作品' },
+      { key: 'job', label: '工作' },
+      { key: 'bg', label: '背景' },
+    ],
+
     ui: {
       language: '语言',
       contact: '联系方式',
-      browseHint: '← → 换档 ／ ENTER 读取 ／ 拖动或横向滑动',
+      browseHint: '点任意一张档案直接读取 ／ ESC 返回',
       open: '读取档案',
       back: '返回索引',
       close: '返回',
@@ -44,6 +51,7 @@ export const copy = {
     records: [
       {
         id: 'X-01',
+        col: 'system',
         kind: '系统',
         clearance: '在范围内',
         title: '多租户协作平台',
@@ -73,6 +81,7 @@ export const copy = {
       },
       {
         id: 'X-02',
+        col: 'work',
         kind: '作品',
         clearance: '在范围内',
         title: '一份契约，三种工具面',
@@ -101,6 +110,7 @@ export const copy = {
       },
       {
         id: 'X-03',
+        col: 'work',
         kind: '作品',
         clearance: '在范围内',
         title: '重建 ERP 的差分 oracle',
@@ -129,6 +139,7 @@ export const copy = {
       },
       {
         id: 'X-04',
+        col: 'work',
         kind: '作品',
         clearance: '在范围内',
         title: 'Agent 改不动的评估框架',
@@ -156,6 +167,7 @@ export const copy = {
       },
       {
         id: 'X-05',
+        col: 'work',
         kind: '作品',
         clearance: '在范围内',
         title: '交付基础设施',
@@ -183,6 +195,7 @@ export const copy = {
       },
       {
         id: 'X-06',
+        col: 'job',
         kind: '工作',
         clearance: '现行',
         title: '元序科技',
@@ -204,6 +217,7 @@ export const copy = {
       },
       {
         id: 'X-07',
+        col: 'job',
         kind: '工作',
         clearance: '已归档',
         title: '浙江绿洲制冷设备有限公司',
@@ -225,6 +239,7 @@ export const copy = {
       },
       {
         id: 'X-08',
+        col: 'job',
         kind: '工作',
         clearance: '已归档',
         title: '虹软科技 ArcSoft',
@@ -244,6 +259,7 @@ export const copy = {
       },
       {
         id: 'X-09',
+        col: 'bg',
         kind: '教育',
         clearance: '已归档',
         title: '杭州电子科技大学',
@@ -265,6 +281,7 @@ export const copy = {
       },
       {
         id: 'X-10',
+        col: 'bg',
         kind: '奖项',
         clearance: '已归档',
         title: '竞赛与项目',
@@ -306,10 +323,17 @@ export const copy = {
       links,
     },
 
+    columns: [
+      { key: 'system', label: 'System' },
+      { key: 'work', label: 'Work' },
+      { key: 'job', label: 'Jobs' },
+      { key: 'bg', label: 'Background' },
+    ],
+
     ui: {
       language: 'Language',
       contact: 'Contact',
-      browseHint: '← → to step ／ ENTER to read ／ drag or swipe sideways',
+      browseHint: 'Click any record to read it ／ ESC to go back',
       open: 'Read record',
       back: 'Archive overview',
       close: 'Back',
@@ -319,6 +343,7 @@ export const copy = {
     records: [
       {
         id: 'X-01',
+        col: 'system',
         kind: 'System',
         clearance: 'In scope',
         title: 'Multi-tenant collaboration platform',
@@ -349,6 +374,7 @@ export const copy = {
       },
       {
         id: 'X-02',
+        col: 'work',
         kind: 'Work',
         clearance: 'In scope',
         title: 'One contract, three tool surfaces',
@@ -378,6 +404,7 @@ export const copy = {
       },
       {
         id: 'X-03',
+        col: 'work',
         kind: 'Work',
         clearance: 'In scope',
         title: 'Differential oracles for a rebuilt ERP',
@@ -408,6 +435,7 @@ export const copy = {
       },
       {
         id: 'X-04',
+        col: 'work',
         kind: 'Work',
         clearance: 'In scope',
         title: 'An evaluation harness agents cannot edit',
@@ -437,6 +465,7 @@ export const copy = {
       },
       {
         id: 'X-05',
+        col: 'work',
         kind: 'Work',
         clearance: 'In scope',
         title: 'Delivery infrastructure',
@@ -466,6 +495,7 @@ export const copy = {
       },
       {
         id: 'X-06',
+        col: 'job',
         kind: 'Work',
         clearance: 'Current',
         title: 'Yuansu Technology',
@@ -488,6 +518,7 @@ export const copy = {
       },
       {
         id: 'X-07',
+        col: 'job',
         kind: 'Work',
         clearance: 'Archived',
         title: 'Zhejiang Lvzhou Refrigeration',
@@ -510,6 +541,7 @@ export const copy = {
       },
       {
         id: 'X-08',
+        col: 'job',
         kind: 'Work',
         clearance: 'Archived',
         title: 'ArcSoft',
@@ -529,6 +561,7 @@ export const copy = {
       },
       {
         id: 'X-09',
+        col: 'bg',
         kind: 'Education',
         clearance: 'Archived',
         title: 'Hangzhou Dianzi University',
@@ -550,6 +583,7 @@ export const copy = {
       },
       {
         id: 'X-10',
+        col: 'bg',
         kind: 'Award',
         clearance: 'Archived',
         title: 'Competitions and projects',
