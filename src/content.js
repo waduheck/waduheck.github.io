@@ -1,12 +1,12 @@
 // 主页上的文字和数字都在这里改，组件里不写内容。
 //
 // 数字口径（2026-10-30 从代码/契约实测，不是估算）：
-//   180 ops = packages/contract/generated/openapi.json 里带 x-bitoa-op 的操作数
-//   120 write / 44 destructive = 同一文件 x-bitoa-op 的 write / destructive 标记
-//   180 MCP tools = 带 x-mcp-tool 的操作数（与 CLI 命令一一对应）
-//   73 oracles = qinsi-erp 仓库 specs/**\/oracle/*.yaml 的文件数，覆盖 10 个业务域
+//   180 ops = 契约生成物 openapi.json 里带声明标记的操作数
+//   120 write / 44 destructive = 同一文件里每个操作的 write / destructive 标记
+//   180 MCP tools = 带 MCP 标记的操作数（与 CLI 命令一一对应）
+//   73 oracles = 差分 oracle 文件数，覆盖 10 个业务域
 //
-// 发布前：公司项目名、客户名、内网地址都不要写进来；下面的表述已脱敏。
+// 发布前：产品名、客户名、内网地址、仓库路径都不要写进来；下面的表述已脱敏。
 // 旧数字（260 routes / 88 write / 37 irreversible / 54 oracles / 16 modules）
 // 与当前契约对不上，已按实测替换，别再改回去。
 

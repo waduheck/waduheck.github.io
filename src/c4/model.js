@@ -1,6 +1,6 @@
-// BitOA 的 C4 模型。元素和关系都来自 KKparty/bitlogue 代码（2026-10 核对）。
+// C4 模型：一个多租户协作平台。元素和关系都来自代码核对（2026-10），已脱敏。
 // 坐标是元素中心点；两层共用同一画布尺寸，缩放动画才能对齐。
-// 发布前：客户名、内网地址不要写进来。
+// 发布前：产品名、客户名、内网地址、仓库路径都不要写进来。
 
 export const SIZE = {
   person: { w: 200, h: 96 },
@@ -34,34 +34,34 @@ const externals = [
 export const levels = {
   context: {
     id: 'context',
-    title: 'System Context diagram for BitOA',
+    title: 'System Context diagram — team collaboration platform',
     subtitle: 'Level 1 · who uses the platform and what it depends on',
     view: [1200, 900],
     elements: [
       ...people,
       {
-        id: 'bitoa', kind: 'system', name: 'BitOA', zoom: true,
+        id: 'platform', kind: 'system', name: 'Team platform', zoom: true,
         desc: 'Team collaboration platform: chat, task graph, docs, calendar, meetings, ledger and an embedded agent',
         x: 600, y: 420,
       },
       ...externals,
     ],
     relations: [
-      { from: 'member', to: 'bitoa', label: 'Works in', tech: 'iOS · Android · desktop · web' },
-      { from: 'agentUser', to: 'bitoa', label: 'Calls tools', tech: 'MCP' },
+      { from: 'member', to: 'platform', label: 'Works in', tech: 'iOS · Android · desktop · web' },
+      { from: 'agentUser', to: 'platform', label: 'Calls tools', tech: 'MCP' },
       { from: 'member', to: 'livekit', label: 'Streams media', tech: 'WebRTC', via: { x: 345, y: 640 } },
-      { from: 'bitoa', to: 'llm', label: 'Runs agent turns', tech: 'OpenAI-compatible', t: 0.82 },
-      { from: 'bitoa', to: 'push', label: 'Sends notifications', tech: 'HTTPS', t: 0.55 },
-      { from: 'bitoa', to: 'aliyun', label: 'Transcribes, sends SMS', tech: 'HTTPS', t: 0.6 },
+      { from: 'platform', to: 'llm', label: 'Runs agent turns', tech: 'OpenAI-compatible', t: 0.82 },
+      { from: 'platform', to: 'push', label: 'Sends notifications', tech: 'HTTPS', t: 0.55 },
+      { from: 'platform', to: 'aliyun', label: 'Transcribes, sends SMS', tech: 'HTTPS', t: 0.6 },
     ],
   },
 
   container: {
     id: 'container',
-    title: 'Container diagram for BitOA',
+    title: 'Container diagram — team collaboration platform',
     subtitle: 'Level 2 · the apps and data stores inside the platform, and how they talk',
     view: [1200, 900],
-    boundary: { x: 60, y: 175, w: 1080, h: 425, name: 'BitOA', type: '[Software System]' },
+    boundary: { x: 60, y: 175, w: 1080, h: 425, name: 'Team platform', type: '[Software System]' },
     elements: [
       ...people,
       {
