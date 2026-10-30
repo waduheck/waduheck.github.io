@@ -1,0 +1,176 @@
+{
+  "categories": ["系统", "作品", "工作", "教育", "奖项"],
+  "columns": ["系统", "作品", "工作", "教育", "奖项"],
+  "records": [
+    {
+      "id": "X-001",
+      "title": "多租户协作平台",
+      "en": "MULTI-TENANT COLLABORATION PLATFORM",
+      "department": "设计与实现",
+      "category": "系统",
+      "date": "2025 — 至今",
+      "lead": "独立设计与实现",
+      "clearance": "在范围内",
+      "abstract": "一套多租户协作平台：聊天、任务图、文档、日历、会议、资金台账，以及内嵌的 Agent。所有团队共用一个进程，每个团队只是自己的一份数据库文件——多一个团队几乎不多占资源。对照组是「每个团队单独跑一套服务」，一套常驻 1.3–1.8G，团队一多机器就扛不住。",
+      "findings": [
+        "形态是模块化单体，18 个业务域模块，一个进程发出去。",
+        "k3s + ArgoCD 做 GitOps：推进一次发版就是提交一个镜像 tag，上线后检查不通过自动回滚。",
+        "自建 GitHub Actions runner，9 个应用共用一套发布流程，每个版本上线前必跑核心路径冒烟。",
+        "系统架构见「架构」页签。"
+      ],
+      "diagram": true,
+      "source": "https://github.com/waduheck"
+    },
+    {
+      "id": "X-002",
+      "title": "一份契约，三种工具面",
+      "en": "ONE CONTRACT, THREE TOOL SURFACES",
+      "department": "契约与生成链路",
+      "category": "作品",
+      "date": "TypeSpec → REST / MCP / CLI",
+      "lead": "契约层设计与生成",
+      "clearance": "在范围内",
+      "abstract": "同一份 TypeSpec 源文件，为每个已声明的操作同时生成 REST 路由、MCP 工具清单和 CLI 命令。每个操作都标明是否写、是否有破坏性、需要哪一档权限，所以 Agent 能碰到的面是从契约推导出来的，而不是靠人手维护。手写的历史路由单独计数，契约漂移就变成一处能 diff 的差异。",
+      "findings": [
+        "180 个已声明操作，跨 14 个域；其中 120 个会写、44 个有破坏性。",
+        "同一份契约同时产出 180 个 MCP 工具和 180 条 CLI 命令。",
+        "另有 62 条手写历史路由被单独标记，不参与生成，也不计入上面三个数字。"
+      ],
+      "source": "https://github.com/waduheck"
+    },
+    {
+      "id": "X-003",
+      "title": "重建 ERP 的差分 oracle",
+      "en": "DIFFERENTIAL ORACLES FOR A REBUILT ERP",
+      "department": "差分回归体系",
+      "category": "作品",
+      "date": "73 份 oracle / 10 个业务域",
+      "lead": "回归体系设计",
+      "clearance": "在范围内",
+      "abstract": "把一个生产在用的工厂 ERP 从外部重建。每个模块的期望行为都用测试数据从参照系统里录下来，冻成可执行的 oracle——输入、动作、期望数字，一字不改。「重建版行为是否一致」于是变成可机器判定的回归，而不是两个人对着两块屏幕比。",
+      "findings": [
+        "73 份 oracle 分布在 10 个业务域：生产 24、库存 13、财务 13、物料 9、成品库存 4、商品 3、报表 2、MRP 2、裁剪 2、在产品库存 1。",
+        "每份都记录动作、输入、期望返回值，跑一次就是一次全量对账。",
+        "期望值全部来自参照系统实测，不做任何人工修饰。"
+      ],
+      "source": "https://github.com/waduheck"
+    },
+    {
+      "id": "X-004",
+      "title": "Agent 改不动的评估框架",
+      "en": "AN EVALUATION FRAME AN AGENT CANNOT EDIT",
+      "department": "评估流水线",
+      "category": "作品",
+      "date": "7 条黄金用例",
+      "lead": "评估器与报告链路",
+      "clearance": "在范围内",
+      "abstract": "黄金用例加一份显式的标准答案文件，驱动助手和策略检查器；每跑一次就写一份逐用例报告。提示词或模型一改，是靠实测通过率决定收还是不收，而不是看一次演示碰巧对上了。",
+      "findings": [
+        "对象覆盖助手、策略检查与票据三类。",
+        "标准答案和用例文件与生成代码分开存放，Agent 改业务代码时碰不到评估器本身。",
+        "这是「AI 做完上线就当完成」和「用机器判定它到底做完没有」的分界线。"
+      ],
+      "source": "https://github.com/waduheck"
+    },
+    {
+      "id": "X-005",
+      "title": "交付基础设施",
+      "en": "DELIVERY INFRASTRUCTURE",
+      "department": "IDP 与发布链路",
+      "category": "作品",
+      "date": "k3s / ArgoCD / 自建 runner",
+      "lead": "发布闸门与流水线",
+      "clearance": "在范围内",
+      "abstract": "模块化单体，一个进程发出去，用 k3s + ArgoCD 做 GitOps：推进一次发版就是提交一个镜像 tag，上线后的检查不通过会自动回滚。自建的 GitHub Actions runner，加上每个版本上线前必跑核心路径冒烟的发版闸门。",
+      "findings": [
+        "9 个应用共用一套发布流程，一提交一发版，失败自动回滚。",
+        "发版闸门本身也出过问题：有一次被 6 个测试留下的空库卡住，原因是只读挂载下 SQLite 建不出 -shm 文件。",
+        "处理是把这 6 个目录原样挪走、核对 sha256，再把检查改成只查登记过的团队。"
+      ],
+      "source": "https://github.com/waduheck"
+    },
+    {
+      "id": "X-006",
+      "title": "元序科技",
+      "en": "YUANXU TECHNOLOGY",
+      "department": "软件工程师 / 远程",
+      "category": "工作",
+      "date": "2026.09 — 至今",
+      "lead": "平台与交付链路",
+      "clearance": "现行",
+      "abstract": "远程维护 X-001 那套平台：会议模块、桌面客户端、发布链路，以及契约层的生成与校验。同时把「AI 写代码」约束进流程：改动走 PR，过检查才合并，上线前跑冒烟。",
+      "findings": [
+        "负责平台侧模块与发布链路，接口面由契约层统一生成。",
+        "改动一律走 PR，过检查才合并，上线前跑核心路径冒烟。"
+      ],
+      "source": "https://github.com/waduheck"
+    },
+    {
+      "id": "X-007",
+      "title": "浙江绿洲制冷设备有限公司",
+      "en": "ZHEJIANG LVZHOU REFRIGERATION",
+      "department": "程序员 / 台州",
+      "category": "工作",
+      "date": "2026.06 — 2026.08",
+      "lead": "WMS 数据库 / ERP 物料主数据 / 生产报表",
+      "clearance": "已归档",
+      "abstract": "工厂数字化：仓库管理系统的数据库设计与查询、ERP 物料主数据整理、生产与在制金额报表。工作里最实在的一课是口径——同一个「在制金额」，财务、计划和车间各有一套算法。",
+      "findings": [
+        "仓库管理系统（WMS）的数据库结构设计与查询优化。",
+        "ERP 物料主数据整理与产品分类重构，分类名以验收报表实际口径为准。",
+        "生产与在制金额报表：实际成本表几乎全空、标准成本覆盖不足，最终用入库成本流水作为唯一可用单价源。"
+      ],
+      "source": "https://github.com/waduheck"
+    },
+    {
+      "id": "X-008",
+      "title": "虹软科技 ArcSoft",
+      "en": "ARCSOFT",
+      "department": "算法实习生",
+      "category": "工作",
+      "date": "2025",
+      "lead": "工单流转解析 / 自动复现脚本",
+      "clearance": "已归档",
+      "abstract": "用 LLM 解析工单流转并自动执行复现脚本；实习期内获破格晋升。",
+      "findings": [
+        "把工单文本解析成可执行的复现步骤，减少人工复述成本。",
+        "自动执行复现脚本，把「能不能重现」变成一次可重复的运行。"
+      ],
+      "source": "https://github.com/waduheck"
+    },
+    {
+      "id": "X-009",
+      "title": "杭州电子科技大学",
+      "en": "HANGZHOU DIANZI UNIVERSITY",
+      "department": "计算机科学与技术 / 工学学士",
+      "category": "教育",
+      "date": "2022.09 — 2026.06",
+      "lead": "计算机科学与技术",
+      "clearance": "已归档",
+      "abstract": "计算机科学与技术。在校期间做过可解释强化学习、三维场景语义编辑、3DCAE 三个项目，拿过服务外包大赛全国二等奖。",
+      "findings": [
+        "学位：工学学士；成绩 82.10 / 100。",
+        "课程与项目集中在机器学习、计算机视觉与三维重建方向。",
+        "毕业设计围绕三维场景的语义编辑展开。"
+      ],
+      "source": "https://github.com/waduheck"
+    },
+    {
+      "id": "X-010",
+      "title": "竞赛与项目",
+      "en": "COMPETITIONS & PROJECTS",
+      "department": "可解释 RL / 视觉检测 / 建模",
+      "category": "奖项",
+      "date": "2024 — 2025",
+      "lead": "三条记录",
+      "clearance": "已归档",
+      "abstract": "2024.08 服务外包创新创业大赛全国二等奖（可解释强化学习系统，算法设计与核心代码）；2024.11 全国大学生数学建模竞赛浙江省三等奖；2025 服务外包大赛东部区域赛三等奖（车辆零部件缺陷检测）。",
+      "findings": [
+        "国家级二等奖：可解释强化学习系统，独立完成算法设计与核心代码实现。",
+        "省级三等奖：全国大学生数学建模竞赛。",
+        "区域赛三等奖：车辆零部件缺陷检测。"
+      ],
+      "source": "https://github.com/waduheck"
+    }
+  ]
+}

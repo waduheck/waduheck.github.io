@@ -1,16 +1,18 @@
 {
   "name": "portfolio-homepage",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
-  "description": "Portfolio: design-token driven, Storybook component library, React + Vite",
+  "description": "Portfolio: a looping three-dimensional filing cabinet built on a Three.js engine, with React islands for diagrams",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
     "tokens": "npm run build -w @portfolio/tokens",
-    "dev": "npm run tokens && vite",
-    "build": "npm run tokens && vite build",
+    "patch:rolling": "node scripts/patch-rolling-number.mjs",
+    "archives": "node scripts/export-records.mjs",
+    "dev": "npm run tokens && npm run archives && vite",
+    "build": "npm run tokens && npm run archives && tsc && vite build",
     "preview": "vite preview",
     "storybook": "npm run tokens && storybook dev -p 6006",
     "build-storybook": "npm run tokens && storybook build --output-dir storybook-static"
@@ -21,13 +23,19 @@
     "@storybook/addon-a11y": "^10.6.5",
     "@storybook/addon-docs": "^10.6.5",
     "@storybook/react-vite": "^10.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.183.0",
     "@vitejs/plugin-react": "6.1.2",
     "storybook": "^10.6.5",
     "style-dictionary": "^5.7.1",
+    "typescript": "^5.9.3",
     "vite": "8.3.4"
   },
   "dependencies": {
+    "@kitlangton/rolling-number": "0.4.1",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "three": "^0.183.0"
   }
 }
