@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Hero, Section, WorkRow, Timeline, Reveal, Label, LanguageToggle } from '@portfolio/ui/src';
+import { Hero, Section, WorkRow, Archive, Reveal, Label, LanguageToggle } from '@portfolio/ui/src';
 import C4Diagram from './c4/C4Diagram.jsx';
 import { copy } from './content.js';
 import { LOCALES, detectLocale, rememberLocale, htmlLangOf, applyMeta } from './i18n.js';
@@ -72,9 +72,13 @@ export default function App() {
         title={t.sections.timeline.title}
         kicker={t.sections.timeline.kicker}
       >
-        <Reveal>
-          <Timeline items={t.timeline} awardsLabel={t.awardsLabel} awards={t.awards} />
-        </Reveal>
+        <Archive
+          key={locale}
+          items={t.archive}
+          kinds={t.archiveKinds}
+          hint={t.archiveHint}
+          closeLabel={t.archiveClose}
+        />
       </Section>
 
       <footer className="foot">
