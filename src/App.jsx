@@ -1,89 +1,75 @@
 import { useEffect, useState } from 'react';
-import { Hero, Section, WorkRow, Archive, Reveal, Label, LanguageToggle } from '@portfolio/ui/src';
+import { Archive, Record as RecordView, LanguageToggle, Link } from '@portfolio/ui/src';
 import C4Diagram from './c4/C4Diagram.jsx';
-import { copy } from './content.js';
+import { copy } from './records.js';
 import { LOCALES, detectLocale, rememberLocale, htmlLangOf, applyMeta } from './i18n.js';
 
-const stagger = (i) => i * 80;
-
-function Works({ works }) {
-  return (
-    <div className="works">
-      {works.map((w, i) => (
-        <Reveal key={w.id} delay={stagger(i)}>
-          <WorkRow {...w} />
-        </Reveal>
-      ))}
-    </div>
-  );
-}
-
+// 整站 = 一个档案库：固定的品牌框 + 循环阵列 + 抽取后的卷宗。
+// 没有滚动章节；系统架构是 X-01 的「架构」页，不再单独占一节。
 export default function App() {
-  // 首次渲染前就定好语言，避免先闪一下中文再跳成英文
   const [locale, setLocale] = useState(detectLocale);
+  const [openId, setOpenId] = useState(null);
   const t = copy[locale] ?? copy.en;
+  const open = openId ? (t.records.find((r) => r.id === openId) ?? null) : null;
 
   useEffect(() => {
     applyMeta({ ...t.meta, htmlLang: htmlLangOf(locale) });
   }, [locale, t]);
 
-  const changeLocale = (next) => {
-    rememberLocale(next);
-    setLocale(next);
-  };
+  // 打开卷宗时锁住页面滚动
+  useEffect(() => {
+    document.body.classList.toggle('is-locked', Boolean(open));
+    return () => document.body.classList.remove('is-locked');
+  }, [open]);
+
+  // 正文为空的标签页交给可视区渲染（X-01 的「架构」页放 C4 图）
+  const renderVisual = (r, tabIndex) =>
+    r.tabs[tabIndex]?.body === '' ? <C4Diagram key={locale} locale={locale} /> : null;
 
   return (
-    <main className="page">
-      <Hero
-        {...t.profile}
-        actions={
-          <LanguageToggle
-            value={locale}
-            onChange={changeLocale}
-            options={LOCALES}
-            label={t.ui.language}
-          />
-        }
-        contactLabel={t.ui.contact}
+    <main className="site">
+      <header className="brand">
+        <p className="brand__name">{t.brand.name}</p>
+        <p className="brand__line">{t.brand.line1}</p>
+        <p className="brand__line">{t.brand.line2}</p>
+      </header>
+
+      <div className="rail">
+        <LanguageToggle
+          value={locale}
+          onChange={(next) => {
+            rememberLocale(next);
+            setLocale(next);
+          }}
+          options={LOCALES}
+          label={t.ui.language}
+        />
+        <nav className="rail__links" aria-label={t.ui.contact}>
+          {t.brand.links.map((l) => (
+            <Link key={l.label} href={l.href}>
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
+
+      <Archive
+        key={locale}
+        items={t.records}
+        hint={t.ui.browseHint}
+        openLabel={t.ui.open}
+        onOpen={(r) => setOpenId(r.id)}
       />
 
-      <Section
-        id="work"
-        index={t.sections.work.index}
-        title={t.sections.work.title}
-        kicker={t.sections.work.kicker}
-      >
-        <Works works={t.works} />
-      </Section>
-
-      <Section
-        id="system"
-        index={t.sections.system.index}
-        title={t.sections.system.title}
-        kicker={t.sections.system.kicker}
-      >
-        {/* key 让切换语言时整张图重建，避免残留上一语言的标签 */}
-        <C4Diagram key={locale} locale={locale} />
-      </Section>
-
-      <Section
-        id="timeline"
-        index={t.sections.timeline.index}
-        title={t.sections.timeline.title}
-        kicker={t.sections.timeline.kicker}
-      >
-        <Archive
-          key={locale}
-          items={t.archive}
-          kinds={t.archiveKinds}
-          hint={t.archiveHint}
-          closeLabel={t.archiveClose}
+      {open ? (
+        <RecordView
+          key={open.id}
+          record={open}
+          ui={t.ui}
+          onClose={() => setOpenId(null)}
+          renderVisual={renderVisual}
         />
-      </Section>
-
-      <footer className="foot">
-        <Label>{t.footer}</Label>
-      </footer>
+      ) : null}
     </main>
   );
 }

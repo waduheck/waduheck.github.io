@@ -7,6 +7,7 @@ export { default as Prose } from './Prose.jsx';
 export { default as Section } from './Section.jsx';
 export { default as WorkRow } from './WorkRow.jsx';
 export { default as Archive } from './Archive.jsx';
+export { default as Record } from './Record.jsx';
 export { default as Hero } from './Hero.jsx';
 export { default as LanguageToggle } from './LanguageToggle.jsx';
 import './editorial.css';

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 // 循环档案阵列：内容序号和物理位置分开，左右走到头接着沿原方向继续。
-// 选中的档案从阵列里「抽取」出来，详情自上而下解密展开。
-// 参考 Rhine Lab 的《循环阵列与滚动标题》与《抽取、解密与阅读》两块。
+// 这里是「浏览」层；选中一张按回车，交给上层打开详情（Record）。
+// 参考 Rhine Lab 的《循环档案阵列》与《滚动标题》。
 
 const SPACING = 208;
 const DEPTH = 132;
@@ -11,10 +11,9 @@ const DRAG_THRESHOLD = 8;
 // 把索引差折到 [-n/2, n/2)：两端接起来，阵列就没有接缝
 const wrapDelta = (v, n) => (((v + n / 2) % n) + n) % n - n / 2;
 
-export default function Archive({ items = [], kinds = {}, hint = '', closeLabel = '关闭' }) {
+export default function Archive({ items = [], hint = '', openLabel = '', onOpen }) {
   const n = items.length;
   const [pos, setPos] = useState(0);
-  const [open, setOpen] = useState(null);
   const target = useRef(0);
   const drag = useRef(null);
   const wheelLock = useRef(0);
@@ -50,11 +49,7 @@ export default function Archive({ items = [], kinds = {}, hint = '', closeLabel 
   };
 
   const selected = ((Math.round(pos) % n) + n) % n;
-
-  // 位置取整后自动把抽取的详情收起来，避免文字和卡片对不上
-  useEffect(() => {
-    setOpen((o) => (o !== null && o !== selected ? null : o));
-  }, [selected]);
+  const current = items[selected];
 
   const onPointerDown = (e) => {
     drag.current = { x: e.clientX, start: target.current, moved: false };
@@ -93,14 +88,11 @@ export default function Archive({ items = [], kinds = {}, hint = '', closeLabel 
       step(-1);
     } else if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      setOpen(selected);
-    } else if (e.key === 'Escape') {
-      setOpen(null);
+      onOpen?.(current);
     }
   };
 
   if (!n) return null;
-  const current = items[selected];
 
   return (
     <div className="archive">
@@ -116,7 +108,7 @@ export default function Archive({ items = [], kinds = {}, hint = '', closeLabel 
             {String(selected + 1).padStart(2, '0')}
           </span>
           <span className="archive__total">/ {String(n).padStart(2, '0')}</span>
-          <span className="archive__kind">{kinds[current.kind] ?? ''}</span>
+          <span className="archive__kind">{current.kind}</span>
         </p>
       </div>
 
@@ -139,15 +131,13 @@ export default function Archive({ items = [], kinds = {}, hint = '', closeLabel 
             const d = wrapDelta(i - pos, n);
             const far = Math.abs(d);
             const isSel = far < 0.5;
-            const lifted = open !== null && i === open ? 1 : 0;
             return (
               <div
-                key={`${it.period}-${it.title}`}
+                key={it.id}
                 id={`arc-${i}`}
                 role="option"
                 aria-selected={isSel}
-                className={`slab${isSel ? ' is-sel' : ''}${lifted ? ' is-out' : ''}`}
-                data-dist={far.toFixed(2)}
+                className={`slab${isSel ? ' is-sel' : ''}`}
                 style={{
                   transform:
                     `translate3d(${d * SPACING}px, 0, ${-far * DEPTH}px) ` +
@@ -159,12 +149,12 @@ export default function Archive({ items = [], kinds = {}, hint = '', closeLabel 
                 onClick={() => {
                   if (drag.current?.moved) return;
                   if (!isSel) jump(i);
-                  else setOpen(open === i ? null : i);
+                  else onOpen?.(it);
                 }}
               >
                 <div className="slab__body">
-                  <span className="slab__kind">{kinds[it.kind] ?? ''}</span>
-                  <span className="slab__year">{it.period.slice(0, 4)}</span>
+                  <span className="slab__kind">{it.kind}</span>
+                  <span className="slab__id">{it.id}</span>
                   <span className="slab__name">{it.title}</span>
                 </div>
               </div>
@@ -177,7 +167,7 @@ export default function Archive({ items = [], kinds = {}, hint = '', closeLabel 
       <div className="archive__scale" role="tablist" aria-label="archive positions">
         {items.map((it, i) => (
           <button
-            key={`tick-${it.period}-${i}`}
+            key={`tick-${it.id}`}
             type="button"
             role="tab"
             aria-selected={i === selected}
@@ -188,23 +178,12 @@ export default function Archive({ items = [], kinds = {}, hint = '', closeLabel 
         ))}
       </div>
 
-      {/* 抽取后的详情：自上而下解密展开 */}
-      <div className={`detail${open !== null ? ' is-open' : ''}`} aria-hidden={open === null}>
-        <div className="detail__inner">
-          <span className="detail__scan" aria-hidden="true" />
-          <p className="detail__meta">
-            <span>{current.period}</span>
-            <span className="detail__sep">/</span>
-            <span>{current.role}</span>
-          </p>
-          {current.note ? <p className="detail__note">{current.note}</p> : null}
-          <button type="button" className="detail__close" onClick={() => setOpen(null)}>
-            {closeLabel}
-          </button>
-        </div>
+      <div className="archive__foot">
+        <button type="button" className="archive__open" onClick={() => onOpen?.(current)}>
+          {openLabel} <span aria-hidden="true">→</span>
+        </button>
+        <p className="archive__hint">{hint}</p>
       </div>
-
-      <p className="archive__hint">{hint}</p>
     </div>
   );
 }
